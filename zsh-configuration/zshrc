@@ -1,9 +1,11 @@
 # Exports {{{
 export GITHUB_USER="AdrianGPrado"
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/snap/bin # Reorder PATH so local bin is first
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 export GREP_COLOR='1;32'
 export MANPAGER="less -X" # Don’t clear the screen after quitting a manual page
-export EDITOR="vim"
+export EDITOR="nvim"
 export TERM="screen-256color"
 export CLICOLOR=1
 export LS_COLORS=Gxfxcxdxbxegedabagacad
@@ -85,8 +87,8 @@ alias tmuxkillall="tmux ls | cut -d : -f 1 | xargs -I {} tmux kill-session -t {}
 alias ct="ctags -R --exclude=.git --exclude=node_modules"
 alias dotfiles="ls -a | grep '^\.' | grep --invert-match '\.DS_Store\|\.$'"
 
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
+#alias dir='dir --color=auto'
+#alias vdir='vdir --color=auto'
 
 #alias grep='grep --color=auto'
 #alias fgrep='fgrep --color=auto'
