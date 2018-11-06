@@ -1,0 +1,180 @@
+{
+    "breadcrumbs.enabled": true,
+    "cSpell.language": "en,en-US",
+    "cSpell.userWords": [
+        "boto",
+        "botocore",
+        "parametrize",
+        "pytest",
+        "vacasa",
+        "xmltodict"
+    ],
+    "editor.minimap.renderCharacters": false,
+    "editor.minimap.maxColumn": 80,
+    "editor.fontFamily": "Monaco, Menlo, 'Courier New', monospace",
+    "editor.wrappingIndent": "deepIndent",
+    "editor.minimap.enabled": false,
+    "editor.wordWrap": "on",
+    "editor.lineNumbers": "relative",
+    "editor.renderWhitespace": "boundary",
+    "editor.smoothScrolling": true,
+    "editor.tabCompletion": "on",
+    "editor.scrollBeyondLastColumn": 0,
+    "editor.suggest.localityBonus": true,
+    "diffEditor.ignoreTrimWhitespace": true,
+    "files.trimTrailingWhitespace": true,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/.vscode": true,
+        "**/.idea": true,
+    },
+    "gitlens.settings.mode": "advanced",
+    "gitlens.historyExplorer.enabled": false,
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true
+    },
+    "githubPullRequests.hosts": [
+        {
+            "host": "https://github.com",
+            "username": "oauth",
+            "token": "system"
+        }
+    ],
+    "python.unitTest.autoTestDiscoverOnSaveEnabled": false,
+    "python.linting.flake8Path": "black",
+    "[python]": {
+        "editor.rulers": [
+            90
+        ],
+        "editor.wordWrapColumn": 90,
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4
+    },
+    "[go]": {
+        "editor.rulers": [
+            90
+        ],
+        "editor.insertSpaces": false,
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4
+    },
+    "[php]": {
+        "editor.rulers": [
+            120
+        ],
+        "editor.wordWrapColumn": 120,
+        "editor.insertSpaces": false,
+        "editor.formatOnSave": true,
+    },
+    "html.format.wrapLineLength": 80,
+    "telemetry.enableTelemetry": false,
+    "sync.gist": "556286054680549898343b40c54199bb2c9b58a4",
+    "sync.forceDownload": true,
+    "vim.leader": ",",
+    "vim.foldfix": true,
+    "vim.useSystemClipboard": true,
+    "vim.statusBarColorControl": true,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "leader",
+                "w"
+            ],
+            "commands": [
+                "workbench.action.files.save",
+            ],
+        },
+        {
+            "before": [
+                "leader",
+                "q"
+            ],
+            "commands": [
+                "workbench.action.closeActiveEditor"
+            ],
+        },
+        {
+            "before": [
+                "Z",
+                "Z"
+            ],
+            "commands": [
+                ":wq"
+            ]
+        },
+        {
+            "before": [
+                ":"
+            ],
+            "commands": [
+                "workbench.action.showCommands",
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "m"
+            ],
+            "commands": [
+                "bookmarks.toggle"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "b"
+            ],
+            "commands": [
+                "bookmarks.list"
+            ]
+        },
+        {
+            "before": [
+                ">"
+            ],
+            "commands": [
+                "editor.action.indentLines"
+            ]
+        },
+        {
+            "before": [
+                "<"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
+            ]
+        },
+    ],
+    "window.zoomLevel": 0,
+    "workbench.colorTheme": "Tomorrow Night Blue",
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f"
+    },
+    // Custom tags for the parser to use
+    // Enable/disable default YAML formatter (requires restart)
+    "yaml.format.enable": true,
+    "yaml.customTags": [
+        "!And",
+        "!If",
+        "!Not",
+        "!Equals",
+        "!Or",
+        "!FindInMap",
+        "!Base64",
+        "!Cidr",
+        "!Ref",
+        "!Sub",
+        "!GetAtt",
+        "!GetAZs",
+        "!ImportValue",
+        "!Select",
+        "!Split",
+        "!Join"
+    ],
+}
