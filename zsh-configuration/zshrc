@@ -12,8 +12,7 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 
 # Go {{{
 export GOPATH=$HOME/Projects/Golang
-export GOROOT=$HOME/go
-export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
 
 # Autocompletion
 eval "$(go env init -)"
@@ -21,6 +20,9 @@ eval "$(go env init -)"
 # }}}
 
 # Python {{{
+
+export PYENV_ROOT=$HOME/.pyenv
+
 ## pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
 ## cache pip-installed packages to avoid re-downloading
@@ -85,8 +87,8 @@ alias dotfiles="ls -a | grep '^\.' | grep --invert-match '\.DS_Store\|\.$'"
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
+#alias grep='grep --color=auto'
+#alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias ls='ls --color=auto'
 
