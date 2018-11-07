@@ -61,6 +61,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Terminal Vim with 256 colors colorscheme
 Plug 'fisadev/fisa-vim-colorscheme'
+" Terminal Vim base-16 256 colorscheme
+Plug 'chriskempson/base16-vim'
+" Tomorrow colorscheme
+Plug 'chriskempson/tomorrow-theme'
 " Consoles as buffers
 "Plug 'rosenfeld/conque-term'
 " Pending tasks list
@@ -73,8 +77,6 @@ Plug 'fisadev/FixedTaskList.vim'
 "Plug 'michaeljsmith/vim-indent-object'
 " Indentation based movements
 "Plug 'jeetsukumaran/vim-indentwise'
-" Python autocompletion, go to definition.
-"Plug 'davidhalter/jedi-vim'
 " Better autocompletion
 "Plug 'Shougo/neocomplcache.vim'
 " Snippets manager (SnipMate), dependencies, and snippets repo
@@ -98,8 +100,16 @@ Plug 'lilydjwg/colorizer'
 ""Plug 'mileszs/ack.vim'
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
+" Python autocompletion, go to definition.
+"Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'ncm2/ncm2-jedi', {'for': 'python'}
 Plug 'ambv/black', {'for': 'python'}
+" Automatically sort python imports
+Plug 'fisadev/vim-isort', {'for': 'python'}
+
+Plug 'fatih/vim-go', {'for': 'go'}
+Plug 'ncm2/ncm2-go', {'for': 'go'}
+Plug 'mdempsky/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
 
 " Search results counter
 "Plug 'vim-scripts/IndexedSearch'
@@ -522,4 +532,11 @@ fun! StripTrailingWhitespace()
   %s/\s\+$//e
 endfun
 autocmd BufWritePre * call StripTrailingWhitespace()
- " }}}
+" }}}
+
+" Vim settings and mappings {{{
+
+" map <Esc> to exit terminal-mode: >
+tnoremap <Esc> <C-\><C-n>
+
+" }}}
