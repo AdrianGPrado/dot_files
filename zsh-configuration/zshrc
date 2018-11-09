@@ -6,7 +6,7 @@ export MANPAGER="less -X" # Don’t clear the screen after quitting a manual pag
 export EDITOR="vim"
 export TERM="screen-256color"
 export CLICOLOR=1
-export LSCOLORS=Gxfxcxdxbxegedabagacad
+export LS_COLORS=Gxfxcxdxbxegedabagacad
 
 # }}}
 
@@ -76,7 +76,8 @@ function tmuxkill() {
 # }}}
 
 # Alias' {{{
-alias vi="vim"
+alias vi="nvim"
+alias vim="nvim"
 alias r="source ~/.zshrc"
 alias tat='tmux new-session -As $(basename "$PWD" | tr . -)' # will attach if session exists, or create a new session
 alias tmuxsrc="tmux source-file ~/.tmux.conf"
@@ -90,12 +91,12 @@ alias vdir='vdir --color=auto'
 #alias grep='grep --color=auto'
 #alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-alias ls='ls --color=auto'
+#alias ls='ls --color=auto'
 
 # some more ls aliases
-alias ll='ls -alF --color=auto'
-alias la='ls -A --color=auto'
-alias l='ls -CF --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -182,8 +183,6 @@ export PR_RED PR_GREEN PR_YELLOW PR_BLUE PR_WHITE PR_BLACK
 export PR_BOLD_RED PR_BOLD_GREEN PR_BOLD_YELLOW PR_BOLD_BLUE
 export PR_BOLD_WHITE PR_BOLD_BLACK
 
-# Clear LSCOLORS
-unset LSCOLORS
 # }}}
 
 # Set Options {{{
