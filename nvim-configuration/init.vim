@@ -160,7 +160,7 @@ nmap <Leader>R :Ack <cword><CR>
 
 "" use 256 colors when possible
 let &t_Co = 256
-colorscheme solarized
+"colorscheme solarized
 set background=dark
 let g:solarized_termcolors=256
 let g:solarized_visibility='high'
@@ -214,7 +214,8 @@ endif
 
 "" this needs to be here, so vim-plug knows we are declaring the plugins we
 "" want to use
-call plug#begin('~/.vim/plugged')
+"call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
 "" Plugins from github repos:
 
@@ -348,28 +349,6 @@ call plug#begin('~/.vim/plugged')
 "" Indentation based movements
 "Plug 'jeetsukumaran/vim-indentwise'
 
-"" NeoComplCache ------------------------------
-"" Better autocompletion
-"Plug 'Shougo/neocomplcache.vim'
-"" most of them not documented because I'm not sure how they work
-"" (docs aren't good, had to do a lot of trial and error to make
-"" it play nice)
-"let g:neocomplcache_enable_at_startup = 1
-"let g:neocomplcache_enable_ignore_case = 1
-"let g:neocomplcache_enable_smart_case = 1
-"let g:neocomplcache_enable_auto_select = 1
-"let g:neocomplcache_enable_fuzzy_completion = 1
-"let g:neocomplcache_enable_camel_case_completion = 1
-"let g:neocomplcache_enable_underbar_completion = 1
-"let g:neocomplcache_fuzzy_completion_start_length = 1
-"let g:neocomplcache_auto_completion_start_length = 1
-"let g:neocomplcache_manual_completion_start_length = 1
-"let g:neocomplcache_min_keyword_length = 1
-"let g:neocomplcache_min_syntax_length = 1
-"" complete with workds from any opened file
-"let g:neocomplcache_same_filetype_lists = {}
-"let g:neocomplcache_same_filetype_lists._ = '_'
-
 "" Snippets manager (SnipMate), dependencies, and snippets repo
 "Plug 'MarcWeber/vim-addon-mw-utils'
 "Plug 'tomtom/tlib_vim'
@@ -413,6 +392,40 @@ call plug#begin('~/.vim/plugged')
 
 "" Python and other languages code checker ------------------------------
 
+"" NeoComplCache ------------------------------
+"" Better autocompletion
+"Plug 'Shougo/neocomplcache.vim'
+"" most of them not documented because I'm not sure how they work
+"" (docs aren't good, had to do a lot of trial and error to make
+"" it play nice)
+"let g:neocomplcache_enable_at_startup = 1
+"let g:neocomplcache_enable_ignore_case = 1
+"let g:neocomplcache_enable_smart_case = 1
+"let g:neocomplcache_enable_auto_select = 1
+"let g:neocomplcache_enable_fuzzy_completion = 1
+"let g:neocomplcache_enable_camel_case_completion = 1
+"let g:neocomplcache_enable_underbar_completion = 1
+"let g:neocomplcache_fuzzy_completion_start_length = 1
+"let g:neocomplcache_auto_completion_start_length = 1
+"let g:neocomplcache_manual_completion_start_length = 1
+"let g:neocomplcache_min_keyword_length = 1
+"let g:neocomplcache_min_syntax_length = 1
+"" complete with workds from any opened file
+"let g:neocomplcache_same_filetype_lists = {}
+"let g:neocomplcache_same_filetype_lists._ = '_'
+
+" Deoplete
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+"let g:python_host_prog = '/full/path/to/neovim2/bin/python'
+let g:python3_host_prog = '$HOME/.pyenv/versions/neovim/bin/python'
+
 "" Syntastic ------------------------------
 "Plug 'scrooloose/syntastic'
 "" show list of errors and warnings on the current file
@@ -441,19 +454,26 @@ call plug#begin('~/.vim/plugged')
 "" IMPORTANTE: :help Ncm2PopupOpen for more information
 "set completeopt=noinsert,menuone,noselect
 
-"" Jedi-vim ------------------------------
-"" Python autocompletion, go to definition.
-"Plug 'davidhalter/jedi-vim', {'for': 'python'}
-"Plug 'ncm2/ncm2-jedi', {'for': 'python'}
-"" All these mappings work only for python code:
-"" Go to definition
-"let g:jedi#goto_command = ',d'
-"" Find ocurrences
-"let g:jedi#usages_command = ',o'
-"" Find assignments
-"let g:jedi#goto_assignments_command = ',a'
-"" Go to definition in new tab
-"nmap <leader>D :tab split<CR>:call jedi#goto()<CR>
+" Jedi-vim ------------------------------
+" Python autocompletion, go to definition.
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
+" Vim splits
+let g:jedi#use_splits_not_buffers = "left"
+" All these mappings work only for python code:
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>r"
+" Go to definition in new tab
+nmap <leader>D :tab split<CR>:call jedi#goto()<CR>
+" use deoplete-jedi for completions
+let g:jedi#completions_enabled = 0
+" Python async autocompletion.
+Plug 'zchee/deoplete-jedi', {'for': 'python'}
+"let g:deoplete#sources#jedi#show_docstring = 1
 
 "" Automatically sort python imports ------------------------------
 "Plug 'fisadev/vim-isort'
