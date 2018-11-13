@@ -424,7 +424,8 @@ else
 endif
 let g:deoplete#enable_at_startup = 1
 "let g:python_host_prog = '/full/path/to/neovim2/bin/python'
-let g:python3_host_prog = '$HOME/.pyenv/versions/neovim/bin/python'
+let g:python3_host_prog = '/Users/adriangarciaprado/.pyenv/versions/neovim/bin/python3'
+let g:deoplete#_python_version_check = 3
 
 "" Syntastic ------------------------------
 "Plug 'scrooloose/syntastic'
@@ -470,9 +471,9 @@ let g:jedi#rename_command = "<leader>r"
 " Go to definition in new tab
 nmap <leader>D :tab split<CR>:call jedi#goto()<CR>
 " use deoplete-jedi for completions
-let g:jedi#completions_enabled = 0
+"let g:jedi#completions_enabled = 0
 " Python async autocompletion.
-Plug 'zchee/deoplete-jedi', {'for': 'python'}
+"Plug 'zchee/deoplete-jedi', {'for': 'python'}
 "let g:deoplete#sources#jedi#show_docstring = 1
 
 "" Automatically sort python imports ------------------------------
