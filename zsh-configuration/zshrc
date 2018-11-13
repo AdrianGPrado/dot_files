@@ -14,8 +14,7 @@ export LS_COLORS=Gxfxcxdxbxegedabagacad
 
 # Go {{{
 export GOPATH=$HOME/Projects/Golang
-export GOROOT=$HOME/go
-export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
 
 # Autocompletion
 eval "$(go env init -)"
