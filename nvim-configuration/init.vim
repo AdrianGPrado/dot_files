@@ -231,6 +231,9 @@ nmap <leader>t :NERDTreeFind<CR>
 " don;t show these file types
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 
+" DevIcons -----------------------------
+Plug 'ryanoasis/vim-devicons'
+
 " Tagbar -----------------------------
 Plug 'majutsushi/tagbar'
 " toggle tagbar display
