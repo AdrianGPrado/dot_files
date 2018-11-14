@@ -1,6 +1,4 @@
 "" neovim-config
-"" http://fisadev.github.io/fisa-vim-config/
-"" version: 8.3.1
 
 "" Vim settings and mappings {{{
 "" ============================================================================
@@ -414,18 +412,18 @@ call plug#begin('~/.local/share/nvim/plugged')
 "let g:neocomplcache_same_filetype_lists = {}
 "let g:neocomplcache_same_filetype_lists._ = '_'
 
-" Deoplete
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
-"let g:python_host_prog = '/full/path/to/neovim2/bin/python'
-let g:python3_host_prog = '/Users/adriangarciaprado/.pyenv/versions/neovim/bin/python3'
-let g:deoplete#_python_version_check = 3
+"" Deoplete
+"if has('nvim')
+"  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"else
+"  Plug 'Shougo/deoplete.nvim'
+"  Plug 'roxma/nvim-yarp'
+"  Plug 'roxma/vim-hug-neovim-rpc'
+"endif
+"let g:deoplete#enable_at_startup = 1
+"let g:python_host_prog = '/Users/adriangarciaprado/.pyenv/versions/neovim2/bin/python'
+"let g:python3_host_prog = '/Users/adriangarciaprado/.pyenv/versions/neovim/bin/python3'
+""let g:deoplete#_python_version_check = 3
 
 "" Syntastic ------------------------------
 "Plug 'scrooloose/syntastic'
