@@ -96,9 +96,10 @@ set undofile                      " persistent undos - undo after you re-open th
 set undodir=~/.vim/dirs/undos
 set viminfo+=n~/.vim/dirs/viminfo
 
-"" Always highlight column 80 so it's easier to see where
+"" Always highlight column 90 so it's easier to see where
 "" cutoff appears on longer screens
-autocmd BufWinEnter * highlight ColorColumn ctermbg=darkred
+"" http://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
+autocmd BufWinEnter * highlight ColorColumn ctermbg=36
 set colorcolumn=90
 
 "" Add a bit extra marging to the left
@@ -487,6 +488,7 @@ autocmd BufWritePre *.py execute ':Black'
 
 " Automatically sort python imports ------------------------------
 Plug 'fisadev/vim-isort', {'for': 'python'}
+autocmd BufWritePre *.py execute ':Isort'
 
 "Plug 'fatih/vim-go', {'for': 'go'}
 "Plug 'ncm2/ncm2-go', {'for': 'go'}
