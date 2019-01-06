@@ -232,6 +232,9 @@ nmap <leader>t :NERDTreeFind<CR>
 " don;t show these file types
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 
+" Silver Searcher -----------------------------
+Plug 'gabesoft/vim-ags'
+
 " Tagbar -----------------------------
 Plug 'majutsushi/tagbar'
 " toggle tagbar display
@@ -284,12 +287,6 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " GitGutter ------------------------------
 Plug 'airblade/vim-gitgutter'
 
-" Zen coding ------------------------------
-Plug 'mattn/emmet-vim'
-
-" Git integration ------------------------------
-Plug 'motemen/git-vim'
-
 " TabMan ------------------------------
 " Tab list panel
 Plug 'kien/tabman.vim'
@@ -315,7 +312,7 @@ Plug 'vim-airline/vim-airline-themes'
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'dark'
 let g:airline#extensions#whitespace#enabled = 0
-" to use fancy symbols for airline, uncomment the following lines and use a
+let g:airline#extensions#tabline#enabled = 1
 " patched font (more info on the README.rst)
 if !exists('g:airline_symbols')
    let g:airline_symbols = {}
@@ -327,19 +324,12 @@ let g:airline_right_sep = '«'
 let g:airline_right_sep = '◀'
 let g:airline_symbols.linenr = '␊'
 let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.linenr = '|'
 let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
-
-" Consoles as buffers ------------------------------
-Plug 'rosenfeld/conque-term'
-
-" Tasklist ------------------------------
-Plug 'fisadev/FixedTaskList.vim'
-map <F2> :TaskList<CR>
 
 " Surround ------------------------------
 Plug 'tpope/vim-surround'
@@ -349,22 +339,9 @@ Plug 'tpope/vim-surround'
 "" Fix to let ESC work as espected with Autoclose plugin
 "let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 
-" Indent text object ------------------------------
-Plug 'michaeljsmith/vim-indent-object'
-" Indentation based movements
-Plug 'jeetsukumaran/vim-indentwise'
-
-"" Snippets manager (SnipMate), dependencies, and snippets repo
-"Plug 'MarcWeber/vim-addon-mw-utils'
-"Plug 'tomtom/tlib_vim'
-"Plug 'honza/vim-snippets'
-"Plug 'garbas/vim-snipmate'
-
 " Signify ------------------------------
 " Git/mercurial/others diff icons on the side of the file lines
 Plug 'mhinz/vim-signify'
-" this first setting decides in which order try to guess your current vcs
-" UPDATE it to reflect your preferences, it will speed up opening files
 let g:signify_vcs_list = ['git']
 " mappings to jump to changed blocks
 nmap <leader>sn <plug>(signify-next-hunk)
@@ -376,17 +353,6 @@ highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
 highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
-
-"" DragVisuals ------------------------------
-"" Drag visual blocks arround
-"Plug 'fisadev/dragvisuals.vim'
-"" mappings to move blocks in 4 directions
-"vmap <expr> <S-M-LEFT> DVB_Drag('left')
-"vmap <expr> <S-M-RIGHT> DVB_Drag('right')
-"vmap <expr> <S-M-DOWN> DVB_Drag('down')
-"vmap <expr> <S-M-UP> DVB_Drag('up')
-"" mapping to duplicate block
-"vmap <expr> D DVB_Duplicate()
 
 " Window Chooser ------------------------------
 Plug 't9md/vim-choosewin'
@@ -433,9 +399,16 @@ let g:choosewin_overlay_enable = 1
 ""let g:deoplete#_python_version_check = 3
 
 " Syntastic ------------------------------
-Plug 'scrooloose/syntastic'
+Plug 'vim-syntastic/syntastic'
 " show list of errors and warnings on the current file
 nmap <leader>E :Errors<CR>
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 " check also when just opened the file
 let g:syntastic_check_on_open = 1
 " don't put icons on the sign column (it hides the vcs status icons of signify)
@@ -452,29 +425,31 @@ Plug 'lilydjwg/colorizer'
 " Ack code search (requires ack installed in the system)
 Plug 'mileszs/ack.vim'
 
-"" Vim Completion Manager 2 ------------------------------
-"Plug 'ncm2/ncm2'
-"Plug 'roxma/nvim-yarp'
-"" enable ncm2 for all buffers
-"autocmd BufEnter * call ncm2#enable_for_buffer()
-"" IMPORTANTE: :help Ncm2PopupOpen for more information
-"set completeopt=noinsert,menuone,noselect
+"" Vim Deoplete Completion ------------------------------
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
 
-" Jedi-vim ------------------------------
-" Python autocompletion, go to definition.
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
-" Vim splits
-let g:jedi#use_splits_not_buffers = "left"
-" All these mappings work only for python code:
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>r"
-" Go to definition in new tab
-nmap <leader>D :tab split<CR>:call jedi#goto()<CR>
+"" Jedi-vim ------------------------------
+"" Python autocompletion, go to definition.
+"Plug 'davidhalter/jedi-vim', {'for': 'python'}
+"" Vim splits
+"let g:jedi#use_splits_not_buffers = "left"
+"" All these mappings work only for python code:
+"let g:jedi#goto_command = "<leader>d"
+"let g:jedi#goto_assignments_command = "<leader>g"
+"let g:jedi#goto_definitions_command = ""
+"let g:jedi#documentation_command = "K"
+"let g:jedi#usages_command = "<leader>n"
+"let g:jedi#completions_command = "<C-Space>"
+"let g:jedi#rename_command = "<leader>r"
+"" Go to definition in new tab
+"nmap <leader>D :tab split<CR>:call jedi#goto()<CR>
 " use deoplete-jedi for completions
 "let g:jedi#completions_enabled = 0
 " Python async autocompletion.
@@ -490,10 +465,6 @@ autocmd BufWritePre *.py execute ':Black'
 Plug 'fisadev/vim-isort', {'for': 'python'}
 autocmd BufWritePre *.py execute ':Isort'
 
-"Plug 'fatih/vim-go', {'for': 'go'}
-"Plug 'ncm2/ncm2-go', {'for': 'go'}
-"Plug 'mdempsky/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
-
 " Search results counter
 "Plug 'vim-scripts/IndexedSearch'
 " XML/HTML tags navigation
@@ -504,7 +475,20 @@ autocmd BufWritePre *.py execute ':Isort'
 "Plug 'yggdroot/indentline'
 
 "" Tell vim-plug we finished declaring plugins, so it can load them
-call plug#end()
+
+" Language Golang
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+Plug 'stamblerre/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/gocode/vim/symlink.sh' }
+Plug 'rjohnsondev/vim-compiler-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+" To disable calling Golang every time a buffer is saved, put into .vimrc file:
+let g:golang_onwrite = 0
+Plug 'vim-jp/vim-go-extra'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+
+autocmd BufWritePre *.go execute ':GoImports'
+autocmd BufWritePre *.go execute ':GoFmt'
+
+cal plug#end()
 
 "" ============================================================================
 "" Install plugins the first time vim runs
