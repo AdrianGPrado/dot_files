@@ -1,6 +1,7 @@
 # Exports {{{
 export GITHUB_USER="AdrianGPrado"
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/snap/bin # Reorder PATH so local bin is first
+# Reorder PATH so local bin is first
+export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/snap/bin:$PATH
 export PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATHLD_LIBRARY_PATH:/usr/lib:/usr/local/lib"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
