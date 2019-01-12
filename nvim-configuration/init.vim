@@ -421,7 +421,7 @@ let g:deoplete#enable_at_startup = 1
 let g:python_host_prog = '/home/agprado/.pyenv/versions/nvim_py27/bin/python'
 let g:python3_host_prog = '/home/agprado/.pyenv/versions/nvim_py37/bin/python'
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
-autocmd BufRead *.py setlocal foldmethod=indent
+autocmd BufRead *.py setlocal foldmethod=syntax
 
 "" Python autocompletion, go to definition.
 "" Installation instructions
@@ -472,6 +472,7 @@ let g:golang_onwrite = 0
 Plug 'vim-jp/vim-go-extra'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 
+autocmd BufRead *.go setlocal foldmethod=syntax
 autocmd BufWritePre *.go execute ':GoImports'
 autocmd BufWritePre *.go execute ':GoFmt'
 "" }}} " ends Language Golang
