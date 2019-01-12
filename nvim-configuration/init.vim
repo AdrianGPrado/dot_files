@@ -477,7 +477,7 @@ autocmd BufWritePre *.go execute ':GoFmt'
 "" }}} " ends Language Golang
 
 "" Language CSS {{{
-Plug 'lilydjwg/colorizer', {'for', 'css'} " Paint css colors with the real color
+Plug 'lilydjwg/colorizer' " Paint css colors with the real color
 "" }}} " ends Language CSS
 
 "" }}} " ends Languages
