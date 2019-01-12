@@ -22,7 +22,6 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 autocmd FileType html setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType htmldjango setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType javascript setlocal shiftwidth=4 tabstop=4 softtabstop=4
-autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
 "" Highlight words to avoid in tech writing
 "" http://css-tricks.com/words-avoid-educational-writing/
@@ -35,7 +34,6 @@ autocmd BufWinLeave * call clearmatches()
 
 "" Close all folds when opening a new buffer
 autocmd BufRead * setlocal foldmethod=marker
-autocmd BufRead *.py setlocal foldmethod=indent
 
 "" always show status bar
 set laststatus=2
@@ -221,6 +219,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 "" Override configs by directory -----------------------------
 "Plug 'arielrossanigo/dir-configs-override.vim'
 
+"" Code Navigation Extra Panes {{{
 " NERDTree -----------------------------
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " Code commenter
@@ -232,15 +231,67 @@ nmap <leader>t :NERDTreeFind<CR>
 " don;t show these file types
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 
-" Silver Searcher -----------------------------
-Plug 'gabesoft/vim-ags'
-
 " Tagbar -----------------------------
 Plug 'majutsushi/tagbar'
 " toggle tagbar display
 map <F4> :TagbarToggle<CR>
 " autofocus on tagbar open
 let g:tagbar_autofocus = 1
+
+" TabMan ------------------------------
+" Tab list panel
+Plug 'kien/tabman.vim'
+" mappings to toggle display, and to focus on it
+let g:tabman_toggle = 'tl'
+let g:tabman_focus  = 'tf'
+
+" Window Chooser ------------------------------
+Plug 't9md/vim-choosewin'
+" mapping
+nmap  \-  <Plug>(choosewin)
+" show big letters
+let g:choosewin_overlay_enable = 1
+"" }}}
+
+"" Airline {{{
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'dark'
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
+" patched font (more info on the README.rst)
+if !exists('g:airline_symbols')
+   let g:airline_symbols = {}
+endif
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '|'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+"" }}}
+
+" ColorThemes {{{
+" Solarized theme
+Plug 'altercation/vim-colors-solarized'
+" Terminal Vim with 256 colors colorscheme
+Plug 'fisadev/fisa-vim-colorscheme'
+" Terminal Vim base-16 256 colorscheme
+Plug 'chriskempson/base16-vim'
+" Tomorrow colorscheme
+Plug 'chriskempson/tomorrow-theme'
+" Gvim colorscheme
+Plug 'vim-scripts/Wombat'
+"" }}}
+
 
 " CtrlP ------------------------------
 " Code and files fuzzy finder
@@ -284,60 +335,20 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-" GitGutter ------------------------------
-Plug 'airblade/vim-gitgutter'
+" Silver Searcher -----------------------------
+Plug 'gabesoft/vim-ags'
 
-" TabMan ------------------------------
-" Tab list panel
-Plug 'kien/tabman.vim'
-" mappings to toggle display, and to focus on it
-let g:tabman_toggle = 'tl'
-let g:tabman_focus  = 'tf'
-
-" ColorThemes ------------------------------
-" Solarized theme
-Plug 'altercation/vim-colors-solarized'
-" Terminal Vim with 256 colors colorscheme
-Plug 'fisadev/fisa-vim-colorscheme'
-" Terminal Vim base-16 256 colorscheme
-Plug 'chriskempson/base16-vim'
-" Tomorrow colorscheme
-Plug 'chriskempson/tomorrow-theme'
-" Gvim colorscheme
-Plug 'vim-scripts/Wombat'
-
-" Airline ------------------------------
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'dark'
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#tabline#enabled = 1
-" patched font (more info on the README.rst)
-if !exists('g:airline_symbols')
-   let g:airline_symbols = {}
-endif
-" unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '|'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
-
-" Surround ------------------------------
+" Surround: https://github.com/tpope/vim-surround
 Plug 'tpope/vim-surround'
 
 "" Autoclose ------------------------------
 "Plug 'Townk/vim-autoclose'
 "" Fix to let ESC work as espected with Autoclose plugin
 "let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
+
+"" Version Control {{{
+" GitGutter ------------------------------
+Plug 'airblade/vim-gitgutter'
 
 " Signify ------------------------------
 " Git/mercurial/others diff icons on the side of the file lines
@@ -353,50 +364,7 @@ highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
 highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
-
-" Window Chooser ------------------------------
-Plug 't9md/vim-choosewin'
-" mapping
-nmap  \-  <Plug>(choosewin)
-" show big letters
-let g:choosewin_overlay_enable = 1
-
-"" Python and other languages code checker ------------------------------
-
-"" NeoComplCache ------------------------------
-"" Better autocompletion
-"Plug 'Shougo/neocomplcache.vim'
-"" most of them not documented because I'm not sure how they work
-"" (docs aren't good, had to do a lot of trial and error to make
-"" it play nice)
-"let g:neocomplcache_enable_at_startup = 1
-"let g:neocomplcache_enable_ignore_case = 1
-"let g:neocomplcache_enable_smart_case = 1
-"let g:neocomplcache_enable_auto_select = 1
-"let g:neocomplcache_enable_fuzzy_completion = 1
-"let g:neocomplcache_enable_camel_case_completion = 1
-"let g:neocomplcache_enable_underbar_completion = 1
-"let g:neocomplcache_fuzzy_completion_start_length = 1
-"let g:neocomplcache_auto_completion_start_length = 1
-"let g:neocomplcache_manual_completion_start_length = 1
-"let g:neocomplcache_min_keyword_length = 1
-"let g:neocomplcache_min_syntax_length = 1
-"" complete with workds from any opened file
-"let g:neocomplcache_same_filetype_lists = {}
-"let g:neocomplcache_same_filetype_lists._ = '_'
-
-"" Deoplete
-"if has('nvim')
-"  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"else
-"  Plug 'Shougo/deoplete.nvim'
-"  Plug 'roxma/nvim-yarp'
-"  Plug 'roxma/vim-hug-neovim-rpc'
-"endif
-"let g:deoplete#enable_at_startup = 1
-"let g:python_host_prog = '/Users/adriangarciaprado/.pyenv/versions/neovim2/bin/python'
-"let g:python3_host_prog = '/Users/adriangarciaprado/.pyenv/versions/neovim/bin/python3'
-""let g:deoplete#_python_version_check = 3
+"" }}}
 
 " Syntastic ------------------------------
 Plug 'vim-syntastic/syntastic'
@@ -419,51 +387,10 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_style_warning_symbol = '⚠'
+let g:syntastic_python_checkers = ['pylint']
 
-" Paint css colors with the real color
-Plug 'lilydjwg/colorizer'
 " Ack code search (requires ack installed in the system)
 Plug 'mileszs/ack.vim'
-
-"" Vim Deoplete Completion ------------------------------
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
-
-"" Jedi-vim ------------------------------
-"" Python autocompletion, go to definition.
-"Plug 'davidhalter/jedi-vim', {'for': 'python'}
-"" Vim splits
-"let g:jedi#use_splits_not_buffers = "left"
-"" All these mappings work only for python code:
-"let g:jedi#goto_command = "<leader>d"
-"let g:jedi#goto_assignments_command = "<leader>g"
-"let g:jedi#goto_definitions_command = ""
-"let g:jedi#documentation_command = "K"
-"let g:jedi#usages_command = "<leader>n"
-"let g:jedi#completions_command = "<C-Space>"
-"let g:jedi#rename_command = "<leader>r"
-"" Go to definition in new tab
-"nmap <leader>D :tab split<CR>:call jedi#goto()<CR>
-" use deoplete-jedi for completions
-"let g:jedi#completions_enabled = 0
-" Python async autocompletion.
-"Plug 'zchee/deoplete-jedi', {'for': 'python'}
-"let g:deoplete#sources#jedi#show_docstring = 1
-
-" Black -----------------------------
-" Python formater
-Plug 'ambv/black', {'for': 'python'}
-autocmd BufWritePre *.py execute ':Black'
-
-" Automatically sort python imports ------------------------------
-Plug 'fisadev/vim-isort', {'for': 'python'}
-autocmd BufWritePre *.py execute ':Isort'
 
 " Search results counter
 "Plug 'vim-scripts/IndexedSearch'
@@ -474,9 +401,69 @@ autocmd BufWritePre *.py execute ':Isort'
 "" Indent line
 "Plug 'yggdroot/indentline'
 
-"" Tell vim-plug we finished declaring plugins, so it can load them
 
-" Language Golang
+"" Code Languages {{{
+
+"" Vim Deoplete Completion ------------------------------
+"" Installation instructions
+""  - https://github.com/Shougo/deoplete.nvim
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
+"" Language Python {{{
+"" Installation instructions
+let g:python_host_prog = '/home/agprado/.pyenv/versions/nvim_py27/bin/python'
+let g:python3_host_prog = '/home/agprado/.pyenv/versions/nvim_py37/bin/python'
+autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd BufRead *.py setlocal foldmethod=indent
+
+"" Python autocompletion, go to definition.
+"" Installation instructions
+"" Autocompletion Jedi: https://github.com/davidhalter/jedi-vim
+""   Requirements: `pip install jedi` in nvim_py37 virtual env
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
+let g:jedi#use_splits_not_buffers = "right"
+let g:jedi#show_call_signatures = "1"
+"" All these mappings work only for python code:
+"let g:jedi#goto_command = "<leader>d"
+"let g:jedi#goto_assignments_command = "<leader>g"
+"let g:jedi#goto_definitions_command = ""
+"let g:jedi#documentation_command = "K"
+"let g:jedi#usages_command = "<leader>n"
+"let g:jedi#completions_command = "<C-Space>"
+"let g:jedi#rename_command = "<leader>r"
+"" Go to definition in new tab
+nmap <leader>D :tab split<CR>:call jedi#goto()<CR>
+" use deoplete-jedi for completions
+let g:jedi#completions_enabled = 0
+
+"" Deoplete Jedi: https://github.com/zchee/deoplete-jedi
+""   - https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
+Plug 'zchee/deoplete-jedi', {'for': 'python'}
+let g:deoplete#_python_version_check = 3
+let g:deoplete#sources#jedi#show_docstring = 1
+
+" Black: https://github.com/ambv/black
+""   Requirements: `pip install black` in nvim_py37 virtual env
+Plug 'ambv/black', {'for': 'python'}
+let g:black_virtualenv = '/home/agprado/.pyenv/versions/nvim_py37/bin/python'
+let g:black_linelength = 80
+autocmd BufWritePre *.py execute ':Black'
+
+" Isort ------------------------------
+""   Requirements: `pip install isort` in nvim_py37 virtual env
+Plug 'fisadev/vim-isort', {'for': 'python'}
+let g:isort_virtualenv = '/home/agprado/.pyenv/versions/nvim_py37/bin/python'
+autocmd BufWritePre *.py execute ':Isort'
+"" }}} " ends Language Python
+
+" Language Golang {{{
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 Plug 'stamblerre/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/gocode/vim/symlink.sh' }
 Plug 'rjohnsondev/vim-compiler-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
@@ -487,7 +474,15 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 autocmd BufWritePre *.go execute ':GoImports'
 autocmd BufWritePre *.go execute ':GoFmt'
+"" }}} " ends Language Golang
 
+"" Language CSS {{{
+Plug 'lilydjwg/colorizer', {'for', 'css'} " Paint css colors with the real color
+"" }}} " ends Language CSS
+
+"" }}} " ends Languages
+
+"" Tell vim-plug we finished declaring plugins, so it can load them
 cal plug#end()
 
 "" ============================================================================
