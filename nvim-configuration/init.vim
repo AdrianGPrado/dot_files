@@ -156,8 +156,13 @@ nmap <Leader>r :Ack
 nmap <Leader>R :Ack <cword><CR>
 
 "" use 256 colors when possible
-let &t_Co = 256
-"colorscheme solarized
+if has("termguicolors")
+    set termguicolors
+endif
+syntax enable
+set t_Co=256
+set t_ut=
+
 set background=dark
 let g:solarized_termcolors=256
 let g:solarized_visibility='high'
