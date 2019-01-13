@@ -156,16 +156,15 @@ nmap <Leader>r :Ack
 nmap <Leader>R :Ack <cword><CR>
 
 "" use 256 colors when possible
+
+colorscheme one
+set background=dark
 if has("termguicolors")
     set termguicolors
 endif
 syntax enable
-set t_Co=256
-set t_ut=
 
-set background=dark
-let g:solarized_termcolors=256
-let g:solarized_visibility='high'
+let base16colorspace=256
 
 "" store yankring history file there too
 let g:yankring_history_dir = '~/.vim/dirs/'
@@ -261,10 +260,13 @@ let g:choosewin_overlay_enable = 1
 "" Airline {{{
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'dark'
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline_skip_empty_sections = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'one'
 " patched font (more info on the README.rst)
 if !exists('g:airline_symbols')
    let g:airline_symbols = {}
@@ -287,6 +289,8 @@ let g:airline_symbols.whitespace = 'Ξ'
 " ColorThemes {{{
 " Solarized theme
 Plug 'altercation/vim-colors-solarized'
+let g:solarized_termcolors=256
+let g:solarized_visibility='high'
 " Terminal Vim with 256 colors colorscheme
 Plug 'fisadev/fisa-vim-colorscheme'
 " Terminal Vim base-16 256 colorscheme
@@ -295,6 +299,8 @@ Plug 'chriskempson/base16-vim'
 Plug 'chriskempson/tomorrow-theme'
 " Gvim colorscheme
 Plug 'vim-scripts/Wombat'
+" Vim One
+Plug 'rakr/vim-one'
 "" }}}
 
 
@@ -477,9 +483,19 @@ let g:golang_onwrite = 0
 Plug 'vim-jp/vim-go-extra'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 
+autocmd BufRead *.go setlocal syntax=go
 autocmd BufRead *.go setlocal foldmethod=syntax
 autocmd BufWritePre *.go execute ':GoImports'
 autocmd BufWritePre *.go execute ':GoFmt'
+
+let g:go_fold_enable = ['block', 'import', 'varconst', 'package_comment']
+let g:go_highlight_extra_types = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 1
 "" }}} " ends Language Golang
 
 "" Language CSS {{{
