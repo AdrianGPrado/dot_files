@@ -17,6 +17,16 @@ export LS_COLORS='no=00:fi=00:di=34:ow=34;40:ln=35:pi=30;44:so=35;44:do=35;44:bd
 
 # }}}
 
+# Base 16 {{{
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
+# }}}
+
+
+
 # Go {{{
 export GOPATH=$HOME/Projects/Golang
 export GOROOT=/snap/go/current
