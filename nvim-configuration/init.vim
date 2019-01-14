@@ -157,7 +157,7 @@ nmap <Leader>R :Ack <cword><CR>
 
 "" use 256 colors when possible
 
-colorscheme one
+colorscheme base16-material
 set background=dark
 if has("termguicolors")
     set termguicolors
@@ -431,7 +431,7 @@ let g:deoplete#enable_at_startup = 1
 "" Language Python {{{
 "" Installation instructions
 let g:python_host_prog = '/home/agprado/.pyenv/versions/nvim_py27/bin/python'
-let g:python3_host_prog = '/home/agprado/.pyenv/versions/nvim_py37/bin/python'
+let g:python3_host_prog = '/Users/adriangarciaprado/.pyenv/versions/neovim/bin/python'
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufRead *.py setlocal foldmethod=syntax
 
@@ -464,14 +464,14 @@ let g:deoplete#sources#jedi#show_docstring = 1
 " Black: https://github.com/ambv/black
 ""   Requirements: `pip install black` in nvim_py37 virtual env
 Plug 'ambv/black', {'for': 'python'}
-let g:black_virtualenv = '/home/agprado/.pyenv/versions/nvim_py37/bin/python'
+let g:black_virtualenv = '/Users/adriangarciaprado/.pyenv/versions/neovim/bin/black'
 let g:black_linelength = 80
 autocmd BufWritePre *.py execute ':Black'
 
 " Isort ------------------------------
 ""   Requirements: `pip install isort` in nvim_py37 virtual env
 Plug 'fisadev/vim-isort', {'for': 'python'}
-let g:isort_virtualenv = '/home/agprado/.pyenv/versions/nvim_py37/bin/python'
+let g:isort_virtualenv = '/Users/adriangarciaprado/.pyenv/versions/neovim/bin/isort'
 autocmd BufWritePre *.py execute ':Isort'
 "" }}} " ends Language Python
 
