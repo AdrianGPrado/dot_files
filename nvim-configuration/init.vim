@@ -429,8 +429,8 @@ let g:deoplete#enable_at_startup = 1
 
 "" Language Python {{{
 "" Installation instructions
-let g:python_host_prog = '/home/agprado/.pyenv/versions/nvim_py27/bin/python'
-let g:python3_host_prog = '/Users/adriangarciaprado/.pyenv/versions/neovim/bin/python'
+let g:python_host_prog = '/Users/adriangarciapradions/neovim27/bin/python'
+let g:python3_host_prog = '/Users/adriangarciaprado/.pyenv/versions/neovim36/bin/python'
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufRead *.py setlocal foldmethod=syntax
 
@@ -463,14 +463,14 @@ let g:deoplete#sources#jedi#show_docstring = 1
 " Black: https://github.com/ambv/black
 ""   Requirements: `pip install black` in nvim_py37 virtual env
 Plug 'ambv/black', {'for': 'python'}
-let g:black_virtualenv = '/Users/adriangarciaprado/.pyenv/versions/neovim/bin/black'
-let g:black_linelength = 80
+"let g:black_virtualenv = '/Users/adriangarciaprado/.pyenv/versions/neovim36/bin/python'
+let g:black_linelength = 89
 autocmd BufWritePre *.py execute ':Black'
 
 " Isort ------------------------------
 ""   Requirements: `pip install isort` in nvim_py37 virtual env
 Plug 'fisadev/vim-isort', {'for': 'python'}
-let g:isort_virtualenv = '/Users/adriangarciaprado/.pyenv/versions/neovim/bin/isort'
+"let g:isort_virtualenv = '/Users/adriangarciaprado/.pyenv/versions/neovim36/bin/python'
 autocmd BufWritePre *.py execute ':Isort'
 "" }}} " ends Language Python
 
@@ -478,6 +478,7 @@ autocmd BufWritePre *.py execute ':Isort'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 Plug 'stamblerre/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/gocode/vim/symlink.sh' }
 Plug 'rjohnsondev/vim-compiler-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+let g:golang_goroot = '/usr/local/Cellar/go/1.11.4/libexec'
 " To disable calling Golang every time a buffer is saved, put into .vimrc file:
 let g:golang_onwrite = 0
 Plug 'vim-jp/vim-go-extra'
