@@ -25,12 +25,16 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
         eval "$("$BASE16_SHELL/profile_helper.sh")"
 # }}}
 
-
+# Groovy {{{
+export GROOVY_HOME=/usr/local/opt/groovy/libexec
+# }}}
 
 # Go {{{
 export GOPATH=$HOME/Projects/Golang
-export GOROOT=/snap/go/current
-export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
+#export GOROOT=/snap/go/current
+#export GOROOT=/usr/local/bin/go
+#export PATH="$PATH:$GOROOT/bin"
+export PATH="$PATH:$GOPATH/bin"
 
 # Autocompletion
 eval "$(go env init -)"
@@ -56,6 +60,9 @@ if [ -d $HOME/.pyenv ]; then
     eval "$(pyenv virtualenv-init -)"
 fi
 
+if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
+  source "${VIRTUAL_ENV}/bin/activate"
+fi
 
 function cd () {
     builtin cd "$@"    # perform the actual cd
