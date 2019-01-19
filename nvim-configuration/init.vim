@@ -346,8 +346,9 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-" Silver Searcher -----------------------------
+" Silver Searcher: https://github.com/gabesoft/vim-ags -----------------------------
 Plug 'gabesoft/vim-ags'
+let g:ags_enable_async = 1
 
 " Delimitmate: https://github.com/raimondi/delimitmate
 Plug 'raimondi/delimitmate'
