@@ -349,8 +349,8 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " Silver Searcher -----------------------------
 Plug 'gabesoft/vim-ags'
 
-" Surround: https://github.com/tpope/vim-surround
-Plug 'tpope/vim-surround'
+" Delimitmate: https://github.com/raimondi/delimitmate
+Plug 'raimondi/delimitmate'
 
 "" Autoclose ------------------------------
 "Plug 'Townk/vim-autoclose'
