@@ -1,4 +1,4 @@
-"" neovim-config
+" neovim-config
 
 "" Vim settings and mappings {{{
 "" ============================================================================
@@ -157,7 +157,7 @@ nmap <Leader>R :Ack <cword><CR>
 
 "" use 256 colors when possible
 
-colorscheme one
+colorscheme base16-material
 set background=dark
 if has("termguicolors")
     set termguicolors
@@ -295,6 +295,14 @@ let g:solarized_visibility='high'
 Plug 'fisadev/fisa-vim-colorscheme'
 " Terminal Vim base-16 256 colorscheme
 Plug 'chriskempson/base16-vim'
+function! s:base16_customize() abort
+  call Base16hi("MatchParen", g:base16_gui05, g:base16_gui03, g:base16_cterm05, g:base16_cterm03, "bold,italic", "")
+endfunction
+
+augroup on_change_colorschema
+  autocmd!
+  autocmd ColorScheme * call s:base16_customize()
+augroup END
 " Tomorrow colorscheme
 Plug 'chriskempson/tomorrow-theme'
 " Gvim colorscheme
