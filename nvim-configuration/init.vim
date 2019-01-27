@@ -2,7 +2,7 @@
 
 "" Vim settings and mappings {{{
 "" ============================================================================
-"" Vim settings and mappings
+"" Vim settings and mapping s
 
 "" no vi-compatible
 set nocompatible
@@ -143,7 +143,7 @@ map <C-l> <C-W>l
 "imap <M-Down> <ESC><c-w>j
 
 "" old autocomplete keyboard shortcut
-imap <C-J> <C-X><C-O>
+imap <C-J> <C-n>
 
 "" save as sudo
 ca w!! w !sudo tee "%"
@@ -157,7 +157,7 @@ nmap <Leader>R :Ack <cword><CR>
 
 "" use 256 colors when possible
 
-colorscheme base16-material
+colorscheme onedark
 set background=dark
 if has("termguicolors")
     set termguicolors
@@ -223,7 +223,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 "" Override configs by directory -----------------------------
 "Plug 'arielrossanigo/dir-configs-override.vim'
 
-"" Code Navigation Extra Panes {{{
+"" Editor Panes and Windows {{{
 " NERDTree -----------------------------
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " Code commenter
@@ -257,7 +257,31 @@ nmap  \-  <Plug>(choosewin)
 let g:choosewin_overlay_enable = 1
 "" }}}
 
-"" Airline {{{
+" Color Layout: {{{
+" ColorThemes
+"
+" Solarized theme
+Plug 'altercation/vim-colors-solarized'
+let g:solarized_termcolors=256
+let g:solarized_visibility='high'
+" Terminal Vim with 256 colors colorscheme
+Plug 'fisadev/fisa-vim-colorscheme'
+" Terminal Vim base-16 256 colorscheme
+Plug 'chriskempson/base16-vim'
+" Tomorrow colorscheme
+Plug 'chriskempson/tomorrow-theme'
+" Gvim colorscheme
+Plug 'vim-scripts/Wombat'
+" Vim One
+Plug 'rakr/vim-one'
+" Vim OneDark Atom based colorscheme
+" https://github.com/joshdick/onedark.vim
+Plug 'joshdick/onedark.vim'
+let g:onedark_termcolors=256
+""
+
+
+"" Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline#extensions#whitespace#enabled = 0
@@ -266,7 +290,7 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline_skip_empty_sections = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'one'
+let g:airline_theme = 'onedark'
 " patched font (more info on the README.rst)
 if !exists('g:airline_symbols')
    let g:airline_symbols = {}
@@ -286,32 +310,8 @@ let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 "" }}}
 
-" ColorThemes {{{
-" Solarized theme
-Plug 'altercation/vim-colors-solarized'
-let g:solarized_termcolors=256
-let g:solarized_visibility='high'
-" Terminal Vim with 256 colors colorscheme
-Plug 'fisadev/fisa-vim-colorscheme'
-" Terminal Vim base-16 256 colorscheme
-Plug 'chriskempson/base16-vim'
-function! s:base16_customize() abort
-  call Base16hi("MatchParen", g:base16_gui05, g:base16_gui03, g:base16_cterm05, g:base16_cterm03, "bold,italic", "")
-endfunction
-
-augroup on_change_colorschema
-  autocmd!
-  autocmd ColorScheme * call s:base16_customize()
-augroup END
-" Tomorrow colorscheme
-Plug 'chriskempson/tomorrow-theme'
-" Gvim colorscheme
-Plug 'vim-scripts/Wombat'
-" Vim One
-Plug 'rakr/vim-one'
-"" }}}
-
-
+" Code Navigation: {{{
+"
 " CtrlP ------------------------------
 " Code and files fuzzy finder
 Plug 'ctrlpvim/ctrlp.vim'
@@ -343,7 +343,7 @@ nmap \pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
 nmap \wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
 nmap \wc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
 " don't change working directory
-let g:ctrlp_working_path_mode = 0
+let g:ctrlp_working_path_mode = 1
 " ignore these files and folders on file finder
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.git|\.hg|\.svn|node_modules)$',
@@ -354,8 +354,9 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-" Silver Searcher -----------------------------
+" Silver Searcher: https://github.com/gabesoft/vim-ags -----------------------------
 Plug 'gabesoft/vim-ags'
+let g:ags_enable_async = 1
 
 " Delimitmate: https://github.com/raimondi/delimitmate
 Plug 'raimondi/delimitmate'
@@ -365,7 +366,7 @@ Plug 'raimondi/delimitmate'
 "" Fix to let ESC work as espected with Autoclose plugin
 "let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 
-"" Version Control {{{
+"" Version Control
 " GitGutter ------------------------------
 Plug 'airblade/vim-gitgutter'
 
@@ -383,7 +384,21 @@ highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
 highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
+
+" Ack code search (requires ack installed in the system)
+Plug 'mileszs/ack.vim'
+
+" Search results counter
+"Plug 'vim-scripts/IndexedSearch'
+" XML/HTML tags navigation
+"Plug 'vim-scripts/matchit.zip'
+"" Yank history navigation
+"Plug 'vim-scripts/YankRing.vim'
+"" Indent line
+"Plug 'yggdroot/indentline'
 "" }}}
+
+"" Code Languages {{{
 
 " Syntastic ------------------------------
 Plug 'vim-syntastic/syntastic'
@@ -408,21 +423,6 @@ let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_style_warning_symbol = '⚠'
 let g:syntastic_python_checkers = ['pylint']
 
-" Ack code search (requires ack installed in the system)
-Plug 'mileszs/ack.vim'
-
-" Search results counter
-"Plug 'vim-scripts/IndexedSearch'
-" XML/HTML tags navigation
-"Plug 'vim-scripts/matchit.zip'
-"" Yank history navigation
-"Plug 'vim-scripts/YankRing.vim'
-"" Indent line
-"Plug 'yggdroot/indentline'
-
-
-"" Code Languages {{{
-
 "" Vim Deoplete Completion ------------------------------
 "" Installation instructions
 ""  - https://github.com/Shougo/deoplete.nvim
@@ -437,7 +437,10 @@ let g:deoplete#enable_at_startup = 1
 
 "" Language Python {{{
 "" Installation instructions
-let g:python_host_prog = '/home/agprado/.pyenv/versions/nvim_py27/bin/python'
+"let g:python_host_prog = '/Users/adriangarciapradions/neovim27/bin/python'
+"" MacOS configuration
+"let g:python3_host_prog = '/Users/adriangarciaprado/.pyenv/versions/neovim36/bin/python'
+"" Linux Configuration
 let g:python3_host_prog = '/home/agprado/.pyenv/versions/nvim_py37/bin/python'
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufRead *.py setlocal foldmethod=syntax
@@ -447,20 +450,25 @@ autocmd BufRead *.py setlocal foldmethod=syntax
 "" Autocompletion Jedi: https://github.com/davidhalter/jedi-vim
 ""   Requirements: `pip install jedi` in nvim_py37 virtual env
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
-let g:jedi#use_splits_not_buffers = "right"
+"let g:jedi#use_splits_not_buffers = "right"
 let g:jedi#show_call_signatures = "1"
 "" All these mappings work only for python code:
-"let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_command = "gd"
 "let g:jedi#goto_assignments_command = "<leader>g"
 "let g:jedi#goto_definitions_command = ""
 "let g:jedi#documentation_command = "K"
 "let g:jedi#usages_command = "<leader>n"
-"let g:jedi#completions_command = "<C-Space>"
+let g:jedi#completions_command = "<C-Space>"
 "let g:jedi#rename_command = "<leader>r"
 "" Go to definition in new tab
 nmap <leader>D :tab split<CR>:call jedi#goto()<CR>
 " use deoplete-jedi for completions
 let g:jedi#completions_enabled = 0
+
+"" Python Mode:
+" https://github.com/klen/python-mode
+Plug 'klen/python-mode', {'for': 'python'}
+
 
 "" Deoplete Jedi: https://github.com/zchee/deoplete-jedi
 ""   - https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
@@ -471,21 +479,23 @@ let g:deoplete#sources#jedi#show_docstring = 1
 " Black: https://github.com/ambv/black
 ""   Requirements: `pip install black` in nvim_py37 virtual env
 Plug 'ambv/black', {'for': 'python'}
-let g:black_virtualenv = '/home/agprado/.pyenv/versions/nvim_py37/bin/python'
-let g:black_linelength = 80
+"let g:black_virtualenv = '/Users/adriangarciaprado/.pyenv/versions/neovim36/bin/python'
+let g:black_linelength = 89
 autocmd BufWritePre *.py execute ':Black'
 
 " Isort ------------------------------
 ""   Requirements: `pip install isort` in nvim_py37 virtual env
 Plug 'fisadev/vim-isort', {'for': 'python'}
-let g:isort_virtualenv = '/home/agprado/.pyenv/versions/nvim_py37/bin/python'
+"let g:isort_virtualenv = '/Users/adriangarciaprado/.pyenv/versions/neovim36/bin/python'
 autocmd BufWritePre *.py execute ':Isort'
-"" }}} " ends Language Python
+""  " ends Language Python
+"" }}}
 
 " Language Golang {{{
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 Plug 'stamblerre/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/gocode/vim/symlink.sh' }
 Plug 'rjohnsondev/vim-compiler-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+let g:golang_goroot = '/usr/local/Cellar/go/1.11.4/libexec'
 " To disable calling Golang every time a buffer is saved, put into .vimrc file:
 let g:golang_onwrite = 0
 Plug 'vim-jp/vim-go-extra'
@@ -504,13 +514,14 @@ let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_highlight_variable_assignments = 1
-"" }}} " ends Language Golang
+""  " ends Language Golang
+"" }}}
 
 "" Language CSS {{{
 Plug 'lilydjwg/colorizer' " Paint css colors with the real color
-"" }}} " ends Language CSS
+""  " ends Language CSS }}}
 
-"" }}} " ends Languages
+""  " ends Languages }}}
 
 "" Tell vim-plug we finished declaring plugins, so it can load them
 cal plug#end()
@@ -556,4 +567,3 @@ fun! StripTrailingWhitespace()
 endfun
 autocmd BufWritePre * call StripTrailingWhitespace()
 "" }}}
-
