@@ -421,7 +421,8 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_style_warning_symbol = '⚠'
-let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_go_checkers = ['gofmt', 'gocheck']
 
 "" Vim Deoplete Completion ------------------------------
 "" Installation instructions
@@ -465,16 +466,20 @@ nmap <leader>D :tab split<CR>:call jedi#goto()<CR>
 " use deoplete-jedi for completions
 let g:jedi#completions_enabled = 0
 
-"" Python Mode:
-" https://github.com/klen/python-mode
-Plug 'klen/python-mode', {'for': 'python'}
-
 
 "" Deoplete Jedi: https://github.com/zchee/deoplete-jedi
 ""   - https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
 let g:deoplete#_python_version_check = 3
 let g:deoplete#sources#jedi#show_docstring = 1
+
+"" SimplyFold: fold python code
+"" https://github.com/tmhedberg/simpylfold
+Plug 'tmhedberg/simpylfold', {'for': 'python'}
+
+"" Refactoring: Python rope refactoring library
+"" https://github.com/python-rope/rope
+Plug 'python-rope/rope'
 
 " Black: https://github.com/ambv/black
 ""   Requirements: `pip install black` in nvim_py37 virtual env
@@ -486,6 +491,8 @@ autocmd BufWritePre *.py execute ':Black'
 " Isort ------------------------------
 ""   Requirements: `pip install isort` in nvim_py37 virtual env
 Plug 'fisadev/vim-isort', {'for': 'python'}
+let g:vim_isort_map = '<C-i>'
+let g:vim_isort_python_version = 'python3'
 "let g:isort_virtualenv = '/Users/adriangarciaprado/.pyenv/versions/neovim36/bin/python'
 autocmd BufWritePre *.py execute ':Isort'
 ""  " ends Language Python
