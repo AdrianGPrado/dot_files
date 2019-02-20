@@ -157,12 +157,24 @@ nmap <Leader>R :Ack <cword><CR>
 
 "" use 256 colors when possible
 
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+syntax on
 colorscheme onedark
 set background=dark
-if has("termguicolors")
-    set termguicolors
-endif
-syntax enable
 
 let base16colorspace=256
 
@@ -446,6 +458,10 @@ let g:python3_host_prog = '/home/agprado/.pyenv/versions/nvim_py37/bin/python'
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufRead *.py setlocal foldmethod=syntax
 
+"" Python Syntax:
+Plug 'vim-python/python-syntax', {'for': 'python'}
+let g:python_highlight_all = 1
+
 "" Python autocompletion, go to definition.
 "" Installation instructions
 "" Autocompletion Jedi: https://github.com/davidhalter/jedi-vim
@@ -481,20 +497,26 @@ Plug 'tmhedberg/simpylfold', {'for': 'python'}
 "" https://github.com/python-rope/rope
 Plug 'python-rope/rope'
 
-" Black: https://github.com/ambv/black
-""   Requirements: `pip install black` in nvim_py37 virtual env
-Plug 'ambv/black', {'for': 'python'}
-"let g:black_virtualenv = '/Users/adriangarciaprado/.pyenv/versions/neovim36/bin/python'
-let g:black_linelength = 89
-autocmd BufWritePre *.py execute ':Black'
-
 " Isort ------------------------------
 ""   Requirements: `pip install isort` in nvim_py37 virtual env
 Plug 'fisadev/vim-isort', {'for': 'python'}
 let g:vim_isort_map = '<C-i>'
 let g:vim_isort_python_version = 'python3'
+"" MacOS
 "let g:isort_virtualenv = '/Users/adriangarciaprado/.pyenv/versions/neovim36/bin/python'
+"" Linux
+let g:isort_virtualenv = '/agprado/.pyenv/versions/neovim36/bin/python'
 autocmd BufWritePre *.py execute ':Isort'
+
+" Black: https://github.com/ambv/black
+""   Requirements: `pip install black` in nvim_py37 virtual env
+Plug 'ambv/black', {'for': 'python'}
+"" MacOS
+"let g:black_virtualenv = '/Users/adriangarciaprado/.pyenv/versions/neovim36/bin/python'
+"" Linux
+let g:black_virtualenv = '/agprado/.pyenv/versions/neovim36/bin/python'
+let g:black_linelength = 89
+autocmd BufWritePre *.py execute ':Black'
 ""  " ends Language Python
 "" }}}
 
