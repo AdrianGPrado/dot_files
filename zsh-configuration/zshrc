@@ -83,6 +83,13 @@ function pyclean() {
 }
 # }}}
 
+# Node nvm {{{
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion<Paste>
+# }}}
+
+
 # Tmux {{{
 # Makes creating a new tmux session (with a specific name) easier
 function tmuxopen() {
@@ -377,3 +384,10 @@ function postexec {
   set_running_app
 }
 # }}}
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/adriangarciaprado/Vacasa/real-estate-agent-app/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/adriangarciaprado/Vacasa/real-estate-agent-app/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/adriangarciaprado/Vacasa/real-estate-agent-app/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/adriangarciaprado/Vacasa/real-estate-agent-app/node_modules/tabtab/.completions/sls.zsh
