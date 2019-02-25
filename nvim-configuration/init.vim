@@ -452,9 +452,9 @@ let g:deoplete#enable_at_startup = 1
 "" Installation instructions
 "let g:python_host_prog = '/Users/adriangarciapradions/neovim27/bin/python'
 "" MacOS configuration
-"let g:python3_host_prog = '/Users/adriangarciaprado/.pyenv/versions/neovim36/bin/python'
+let g:python3_host_prog = '/Users/adriangarciaprado/.pyenv/versions/neovim36/bin/python'
 "" Linux Configuration
-let g:python3_host_prog = '/home/agprado/.pyenv/versions/nvim_py37/bin/python'
+"let g:python3_host_prog = '/home/agprado/.pyenv/versions/nvim_py37/bin/python'
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufRead *.py setlocal foldmethod=syntax
 
@@ -503,9 +503,9 @@ Plug 'fisadev/vim-isort', {'for': 'python'}
 let g:vim_isort_map = '<C-i>'
 let g:vim_isort_python_version = 'python3'
 "" MacOS
-"let g:isort_virtualenv = '/Users/adriangarciaprado/.pyenv/versions/neovim36/bin/python'
+let g:isort_virtualenv = '/Users/adriangarciaprado/.pyenv/versions/neovim36/bin/python'
 "" Linux
-let g:isort_virtualenv = '/agprado/.pyenv/versions/neovim36/bin/python'
+"let g:isort_virtualenv = '/agprado/.pyenv/versions/neovim36/bin/python'
 autocmd BufWritePre *.py execute ':Isort'
 
 " Black: https://github.com/ambv/black
@@ -514,7 +514,7 @@ Plug 'ambv/black', {'for': 'python'}
 "" MacOS
 "let g:black_virtualenv = '/Users/adriangarciaprado/.pyenv/versions/neovim36/bin/python'
 "" Linux
-let g:black_virtualenv = '/agprado/.pyenv/versions/neovim36/bin/python'
+"let g:black_virtualenv = '/agprado/.pyenv/versions/neovim36/bin/python'
 let g:black_linelength = 89
 autocmd BufWritePre *.py execute ':Black'
 ""  " ends Language Python
