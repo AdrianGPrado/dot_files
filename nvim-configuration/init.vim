@@ -61,6 +61,7 @@ set cursorline
 
 "" Ensure Vim doesn't beep at you every time you make a mistype
 set visualbell
+set noerrorbells
 
 "" highlight a matching [{()}] when cursor is placed on start/end character
 set showmatch
@@ -197,7 +198,14 @@ endif
 "" map <Esc> to exit terminal-mode: >
 tnoremap <Esc> <C-\><C-n>
 
-"" }}}
+""use system clipboard for yanking / putting
+set clipboard^=unnamed
+
+"backups were so last century. Commit often to git
+set nobackup
+set noswapfile
+
+""" }}}
 
 "" Plugins {{{
 "" ============================================================================
@@ -246,6 +254,9 @@ map <F3> :NERDTreeToggle<CR>
 nmap <leader>t :NERDTreeFind<CR>
 " don;t show these file types
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
+
+" Tmux Navigation
+Plug 'christoomey/vim-tmux-navigator'
 
 " Tagbar -----------------------------
 Plug 'majutsushi/tagbar'
@@ -385,6 +396,7 @@ Plug 'airblade/vim-gitgutter'
 " Signify ------------------------------
 " Git/mercurial/others diff icons on the side of the file lines
 Plug 'mhinz/vim-signify'
+
 let g:signify_vcs_list = ['git']
 " mappings to jump to changed blocks
 nmap <leader>sn <plug>(signify-next-hunk)
@@ -422,7 +434,8 @@ set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
+let g:syntastic_aggregate_errors = 1
 " check also when just opened the file
 let g:syntastic_check_on_open = 1
 " don't put icons on the sign column (it hides the vcs status icons of signify)
@@ -432,9 +445,14 @@ let g:syntastic_enable_signs = 0
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_style_warning_symbol = '⚠'
+let g:syntastic_style_warning_symbol = '💩'
 let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_javascript_checkers = ['eslint', 'flow']
 let g:syntastic_go_checkers = ['gofmt', 'gocheck']
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
 
 "" Vim Deoplete Completion ------------------------------
 "" Installation instructions
