@@ -391,3 +391,6 @@ function postexec {
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /Users/adriangarciaprado/Vacasa/real-estate-agent-app/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/adriangarciaprado/Vacasa/real-estate-agent-app/node_modules/tabtab/.completions/sls.zsh
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/adriangarciaprado/.nvm/versions/node/v11.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/adriangarciaprado/.nvm/versions/node/v11.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh
