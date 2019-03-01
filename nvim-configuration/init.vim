@@ -253,7 +253,7 @@ map <F3> :NERDTreeToggle<CR>
 " open nerdtree with the current file selected
 nmap <leader>t :NERDTreeFind<CR>
 " don;t show these file types
-let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
+let NERDTreeIgnore = ['__pycache__$', '\.pyc$', '\.pyo$']
 
 " Tmux Navigation
 Plug 'christoomey/vim-tmux-navigator'
@@ -466,6 +466,8 @@ else
 endif
 let g:deoplete#enable_at_startup = 1
 
+Plug 'sheerun/vim-polyglot'
+
 "" Language Python {{{
 "" Installation instructions
 "let g:python_host_prog = '/Users/adriangarciapradions/neovim27/bin/python'
@@ -476,9 +478,12 @@ let g:python3_host_prog = '/Users/adriangarciaprado/.pyenv/versions/neovim36/bin
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufRead *.py setlocal foldmethod=syntax
 
-"" Python Syntax:
-Plug 'vim-python/python-syntax', {'for': 'python'}
+"" Python Syntax: Included in `vim-polyglot`
+""Plug 'vim-python/python-syntax', {'for': 'python'}
 let g:python_highlight_all = 1
+let g:python_highlight_builtins = 1
+let g:python_highlight_exceptions = 1
+let g:python_highlight_class_vars = 1
 
 "" Python autocompletion, go to definition.
 "" Installation instructions
@@ -539,10 +544,11 @@ autocmd BufWritePre *.py execute ':Black'
 "" }}}
 
 " Language Golang {{{
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+" Vim Go: included in `vim-polyglot`
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 Plug 'stamblerre/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/gocode/vim/symlink.sh' }
 Plug 'rjohnsondev/vim-compiler-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
-let g:golang_goroot = '/usr/local/Cellar/go/1.11.4/libexec'
+let g:golang_goroot = '/usr/local/Cellar/go/1.12/libexec'
 " To disable calling Golang every time a buffer is saved, put into .vimrc file:
 let g:golang_onwrite = 0
 Plug 'vim-jp/vim-go-extra'
@@ -561,12 +567,28 @@ let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_highlight_variable_assignments = 1
+let g:go_highlight_format_strings = 1
 ""  " ends Language Golang
 "" }}}
 
 "" Language CSS {{{
 Plug 'lilydjwg/colorizer' " Paint css colors with the real color
 ""  " ends Language CSS }}}
+
+"" Language javascript {{{
+Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+""  " ends Language javascript }}}
+
+"" Language yaml {{{
+Plug 'pearofducks/ansible-vim', { 'for': 'yaml', 'do': 'cd ./UltiSnips; ./generate.py' }
+let g:ansible_unindent_after_newline = 1
+let g:ansible_normal_keywords_highlight = 'Constant'
+""" ends Language yaml }}}
+
+"" Language toml {{{
+Plug 'cespare/vim-toml'
+""" ends Language toml }}}
+
 
 ""  " ends Languages }}}
 
